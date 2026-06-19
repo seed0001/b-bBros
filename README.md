@@ -26,10 +26,35 @@ them.
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build
-npm start        # serve the production build
+npm run dev      # http://localhost:3000  (no base path in dev)
+npm run build    # static export -> ./out
 ```
+
+## Deployment (GitHub Pages)
+
+This site is a **static export** (`next.config.mjs` -> `output: "export"`,
+base path `/b-bBros`) served from the **`gh-pages` branch**.
+
+> Note: GitHub **Actions is currently billing-locked on this account**, so the
+> automated workflow cannot run. We deploy manually from the branch instead,
+> which uses GitHub's legacy Pages builder (not billed as Actions).
+
+To publish an update:
+
+```bash
+npm run build                               # regenerate ./out
+git worktree add ../bb-ghpages gh-pages     # (first time: add -b gh-pages)
+cd ../bb-ghpages
+git rm -rqf .
+cp -r ../"New folder (37)"/out/. .
+touch .nojekyll                             # ensures _next/ is served as-is
+git add -A && git commit -m "Update site"
+git push origin gh-pages
+```
+
+Pages source is set to **gh-pages / root** (Settings → Pages). The live URL is
+**https://seed0001.github.io/b-bBros/**. Once the Actions billing issue is
+resolved, the Actions-based workflow can be restored for automatic deploys.
 
 ## Project structure
 
