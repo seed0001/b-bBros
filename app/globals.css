@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark mode first: the :root defaults ARE the dark theme. */
+:root {
+  --bg: 9 11 16; /* near-black blue */
+  --surface: 17 20 28;
+  --surface-2: 24 28 38;
+  --border: 39 44 58;
+  --muted: 148 158 178;
+  --fg: 233 237 245;
+
+  --brand: 124 92 255; /* warm violet */
+  --brand-fg: 255 255 255;
+  --accent: 56 211 159; /* creator-green */
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Light mode is opt-in via .light on <html>. */
+.light {
+  --bg: 247 248 251;
+  --surface: 255 255 255;
+  --surface-2: 241 243 248;
+  --border: 224 228 236;
+  --muted: 92 102 122;
+  --fg: 20 24 33;
+
+  --brand: 109 74 255;
+  --brand-fg: 255 255 255;
+  --accent: 13 165 116;
+}
+
+* {
+  border-color: rgb(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle dotted-grid backdrop used behind hero / section bands. */
+.bg-grid {
+  background-image: radial-gradient(
+    rgb(var(--border) / 0.55) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+.bg-radial-brand {
+  background-image: radial-gradient(
+    60% 60% at 50% 0%,
+    rgb(var(--brand) / 0.18) 0%,
+    transparent 70%
+  );
+}
+
+/* Thin scrollbar to match the technical aesthetic. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--muted) / 0.5);
+}
